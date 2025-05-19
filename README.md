@@ -35,3 +35,80 @@ Given a set of characteristics (brand, screen size & resolution, processor, RAM,
 | `Price`            | Numeric     | Price in INR (target variable)                                |
 
 ---
+
+## 4. Project Structure
+
+**Complete Project Structure:**
+
+```
+laptop-price-predictor/
+│
+├── .gitignore
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── run_api.py                   # Entry point for FastAPI app
+│
+├── app/                         # Main app code (FastAPI & ML logic)
+│   ├── __init__.py
+│   ├── api/                     # FastAPI routes
+│   │   ├── __init__.py
+│   │   └── v1/                  # API versioning
+│   │       ├── __init__.py
+│   │       └── endpoints.py     # FastAPI route definitions
+│   │
+│   ├── core/                    # Core config (constants, logging, etc.)
+│   │   ├── __init__.py
+│   │   └── config.py
+│   │
+│   ├── models/                  # ML model logic
+│   │   ├── __init__.py
+│   │   └── predictor.py         # Load and use model for prediction
+│   │
+│   ├── schemas/                 # Pydantic request/response models
+│   │   ├── __init__.py
+│   │   └── laptop.py
+│   │
+│   └── utils/                   # Helper functions (e.g., preprocessing)
+│       ├── __init__.py
+│       └── preprocessing.py
+│
+├── research/                    # Exploratory notebooks & research
+│   ├── assets/
+│   ├── data/
+│   ├── model/
+│   ├── processed_data/
+│   ├── eda.ipynb
+│   ├── model_training.ipynb
+│   └── insights.md
+```
+
+**Description of Key Directories and Files:**
+
+* `.gitignore`: Specifies intentionally untracked files that Git should ignore.
+* `LICENSE`: Contains the licensing information for the project.
+* `README.md`: This file, providing an overview of the project.
+* `requirements.txt`: Lists the Python dependencies required to run the project.
+* `run_api.py`: The main script to start the FastAPI application.
+* `app/`: Contains the core application logic.
+    * `api/`: Handles the API routing using FastAPI.
+        * `v1/`: Directory for version 1 of the API endpoints.
+            * `endpoints.py`: Defines the different API endpoints.
+    * `core/`: Contains core configuration files.
+        * `config.py`: Holds configuration settings for the application.
+    * `models/`: Houses the machine learning model related logic.
+        * `predictor.py`: Responsible for loading the trained ML model and making predictions.
+    * `schemas/`: Defines the data structures for request and response bodies using Pydantic.
+        * `laptop.py`: Defines the schema for laptop data.
+    * `utils/`: Contains utility functions.
+        * `preprocessing.py`: Includes functions for data preprocessing.
+* `research/`: Contains files related to the exploratory data analysis and model development process.
+    * `assets/`: Contain any static assets generated in notebooks.
+    * `data/`: Stores the raw dataset used for training.
+    * `model/`: Contain the serialized trained machine learning model from notebooks.
+    * `processed_data/`: Store intermediate or processed datasets.
+    * `eda.ipynb`: Jupyter Notebook for exploratory data analysis.
+    * `model_training.ipynb`: Jupyter Notebook for training the machine learning model.
+    * `insights.md`: Markdown file documenting insights gained during the research phase.
+
+---
