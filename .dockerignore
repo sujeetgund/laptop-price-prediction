@@ -1,0 +1,9 @@
+.vscode/
+.venv/
+__pycache__/
+*.pyc
+*.ipynb
+research/assets/
+research/eda.ipynb
+research/model_training.ipynb
+deploy.ps1

@@ -1,22 +1,44 @@
-# Laptop Price Prediction
+# 💻 Laptop Price Prediction
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.12-blue.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-🚀-green.svg)
+![Dockerized](https://img.shields.io/badge/Docker-Supported-blue.svg?logo=docker&logoColor=white)
+[![Open Issues](https://img.shields.io/github/issues/sujeetgund/laptop-price-prediction)](https://github.com/sujeetgund/laptop-price-prediction/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/sujeetgund/laptop-price-prediction)](https://github.com/sujeetgund/laptop-price-prediction)
+
+Predict laptop prices using machine learning and insightful data analysis
 
 
-## 1. Problem Statement
-We want to understand which factors most influence the selling price of a laptop.  
-Given a set of characteristics (brand, screen size & resolution, processor, RAM, storage type & size, GPU, operating system, weight), our goal is to build insights and ultimately a predictive model that can estimate the market price of a laptop.
+## 🚀 Overview
 
----
+Welcome to the Laptop Price Predictor — a machine learning project that aims to estimate the market price of a laptop based on its specifications. With the rapid evolution of laptop technology and ever-changing prices, this tool helps identify the key features that influence pricing and uses those insights to build a robust price prediction model.
 
-## 2. Objective
-- Perform data cleaning and feature engineering to prepare the data for modeling.  
-- Visualize univariate distributions and bivariate relationships to discover patterns and correlations.  
-- Identify and handle outliers, missing values, or inconsistent feature encodings.  
-- Generate new features (e.g., pixel count from screen resolution, storage total capacity, CPU speed) that may improve predictive power.  
-- Summarize key findings to guide the choice of modeling techniques in downstream tasks.
+Whether you're a data scientist, ML engineer, or tech enthusiast, this project offers a clean, modular, and deployable ML pipeline backed by FastAPI and Docker.
 
----
 
-## 3. Dataset Description
+## 📌 Problem Statement
+
+Given the specifications of a laptop — such as brand, screen resolution, CPU, RAM, storage, GPU, and weight — can we accurately predict its market price?
+
+By addressing this, we aim to:
+- Understand the primary drivers of laptop pricing.
+- Engineer meaningful features to improve model performance.
+- Deliver a prediction API ready for deployment.
+
+
+## 🎯 Objectives
+
+- ✅ Clean and preprocess raw laptop specification data.
+- ✅ Visualize distributions and discover feature relationships.
+- ✅ Engineer new predictive features like pixel density and total storage.
+- ✅ Handle missing values, outliers, and inconsistent encodings.
+- ✅ Train and evaluate a regression model.
+- ✅ Package the trained model into a FastAPI-based prediction service.
+- ✅ Provide a Docker-ready environment for easy deployment.
+
+
+## 📊 Dataset
 **Source:** (e.g. Kaggle “Laptop Price” dataset)  
 **Size:** ~1,300 records × 12 columns
 
@@ -34,11 +56,8 @@ Given a set of characteristics (brand, screen size & resolution, processor, RAM,
 | `Weight`           | Numeric     | Device weight in kilograms (e.g., “1.37kg”)                   |
 | `Price`            | Numeric     | Price in INR (target variable)                                |
 
----
 
-## 4. Project Structure
-
-**Complete Project Structure:**
+## 🗂️ Project Structure
 
 ```
 laptop-price-predictor/
@@ -48,6 +67,8 @@ laptop-price-predictor/
 ├── README.md
 ├── requirements.txt
 ├── run_api.py                   # Entry point for FastAPI app
+├── Dockerfile                   # Dockerfile for deployment
+├── sample_deploy.ps1            # Sample deploy file with Google Cloud CLI
 │
 ├── app/                         # Main app code (FastAPI & ML logic)
 │   ├── __init__.py
@@ -83,32 +104,89 @@ laptop-price-predictor/
 │   └── insights.md
 ```
 
-**Description of Key Directories and Files:**
+**🔍 Key Components:**
 
-* `.gitignore`: Specifies intentionally untracked files that Git should ignore.
-* `LICENSE`: Contains the licensing information for the project.
-* `README.md`: This file, providing an overview of the project.
-* `requirements.txt`: Lists the Python dependencies required to run the project.
-* `run_api.py`: The main script to start the FastAPI application.
-* `app/`: Contains the core application logic.
-    * `api/`: Handles the API routing using FastAPI.
-        * `v1/`: Directory for version 1 of the API endpoints.
-            * `endpoints.py`: Defines the different API endpoints.
-    * `core/`: Contains core configuration files.
-        * `config.py`: Holds configuration settings for the application.
-    * `models/`: Houses the machine learning model related logic.
-        * `predictor.py`: Responsible for loading the trained ML model and making predictions.
-    * `schemas/`: Defines the data structures for request and response bodies using Pydantic.
-        * `laptop.py`: Defines the schema for laptop data.
-    * `utils/`: Contains utility functions.
-        * `preprocessing.py`: Includes functions for data preprocessing.
-* `research/`: Contains files related to the exploratory data analysis and model development process.
-    * `assets/`: Contain any static assets generated in notebooks.
-    * `data/`: Stores the raw dataset used for training.
-    * `model/`: Contain the serialized trained machine learning model from notebooks.
-    * `processed_data/`: Store intermediate or processed datasets.
-    * `eda.ipynb`: Jupyter Notebook for exploratory data analysis.
-    * `model_training.ipynb`: Jupyter Notebook for training the machine learning model.
-    * `insights.md`: Markdown file documenting insights gained during the research phase.
+* `app/api/v1/endpoints.py`: FastAPI routes for prediction API.
+* `models/predictor.py`: Loads and runs the trained model.
+* `utils/preprocessing.py`: Data cleaning and feature engineering logic.
+* `research/eda.ipynb`: Exploratory data analysis.
+* `research/model_training.ipynb`: Model training & evaluation.
+* `run_api.py`: FastAPI entry point.
+* `Dockerfile`: Containerization for scalable deployment.
 
----
+
+## ⚙️ Getting Started
+
+### 🔧 Requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+### 🏃 Run the API
+
+```bash
+uvicorn run_api:app --reload --port 8080
+```
+
+Then navigate to: [http://localhost:8080/docs](http://localhost:8000/docs)
+
+### 🐳 Docker Support
+
+Build and run the app inside Docker:
+```bash
+docker build -t laptop-price-predictor .
+docker run -p 8080:8080 laptop-price-predictor
+```
+
+
+## 🌐 API Endpoint
+
+| Method | Endpoint   | Description                 |
+| ------ | ---------- | --------------------------- |
+| GET   | `/info` | Get information about app |
+| POST   | `/predict` | Predicts price for a laptop |
+
+
+**Sample request:**
+
+```bash
+curl -X 'POST' \
+  'http://localhost:8000/predict' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "Company": "Asus",
+  "TypeName": "Notebook",
+  "Inches": 15.6,
+  "Ram": 8,
+  "OpSys": "Windows 10",
+  "Weight": 1.69,
+  "HasIpsPanel": 1,
+  "HasTouchScreen": 0,
+  "ResWidth": 1920,
+  "ResHeight": 1080,
+  "ResCategory": "High",
+  "Ppi": 141.21,
+  "Ssd": 512,
+  "Hdd": 0,
+  "Flash": 0,
+  "Hybrid": 0,
+  "CpuCategory": "Intel Core i3",
+  "CpuSpeedGhz": 1,
+  "GpuCategory": "Intel Low-End"
+}'
+```
+
+
+## 📈 Insights
+
+Key findings during EDA and modeling can be found in [research/insights.md](research/insights.md). Some highlights:
+- High-resolution displays and SSDs tend to increase price.
+- GPU and CPU models are strong price indicators.
+- RAM size impacts pricing, especially when paired with high-end components.
+
+
+## 📜 License
+
+This project is licensed under the MIT License.
